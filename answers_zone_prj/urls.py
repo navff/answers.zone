@@ -22,6 +22,4 @@ urlpatterns = [
     re_path(r'^p/(?P<name>\D+)/', views.index, name='name'),
     re_path('p/', views.index, name='p'),
     re_path('', views.index, name='home'),
-
-
 ]
