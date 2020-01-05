@@ -19,7 +19,7 @@ from answers import views
 
 urlpatterns = [
     re_path(r'^admin', admin.site.urls),
-    re_path(r'^p/(?P<name>\D+)/', views.index, name='name'),
-    re_path('p/', views.index, name='p'),
-    re_path('', views.index, name='home'),
+    re_path(r'^p/(?P<name>\D+)/', views.QuestionsPresenter.index, name='name'),
+    re_path('p/', views.QuestionsPresenter.index, name='p'),
+    re_path('', views.QuestionsPresenter.index, name='home'),
 ]
