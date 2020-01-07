@@ -19,7 +19,8 @@ from answers import views
 
 urlpatterns = [
     re_path(r'^admin', admin.site.urls),
-    # path('products/<int:productid>/', views.products),
-    path('p/<str:name>', views.QuestionsPresenter.one_item, name='name'),
-    path('', views.QuestionsPresenter.index, name='home'),
+    path('q', views.QuestionsPresenter.all, name='list'),
+    path('q/<str:question_id>', views.QuestionsPresenter.one_item),
+    path('', views.QuestionsPresenter.all, name='home'),
+    #question_id
 ]

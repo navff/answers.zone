@@ -4,11 +4,16 @@ from django.template.response import TemplateResponse
 
 
 class QuestionsPresenter:
-    def index(request, name="жопулечка"):
-        output = "<h2>User</h2><h3>name: {0}</h3>".format(name)
-        return HttpResponse(output)
+    def one_item(request, question_id):
+        questions_interactor = QuestionInteractor()
+        question = questions_interactor.get_by_id(question_id)
+        template_data = {
+            "question": question,
+        }
 
-    def one_item(request, name):
+        return TemplateResponse(request, "question_module/views/question_one_item.html", context=template_data)
+
+    def all(request):
         questions_interactor = QuestionInteractor()
         questions = questions_interactor.get_all()
         template_data = {
