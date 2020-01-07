@@ -1,4 +1,4 @@
-from answers.question_module.Question import Question
+from answers.modules.question_module.Question import Question
 from django.test import TestCase
 from django.utils import timezone
 
