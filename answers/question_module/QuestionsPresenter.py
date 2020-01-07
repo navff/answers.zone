@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-
+from answers.question_module.QuestionInteractor import QuestionInteractor
 
 class QuestionsPresenter:
     def index(request, name="жопулечка"):
@@ -7,5 +7,7 @@ class QuestionsPresenter:
         return HttpResponse(output)
 
     def one_item(request, name):
-        output = "<h2>Подробка</h2><h3>name: {0}</h3>".format(name)
+        questions_interactor = QuestionInteractor()
+        questions = questions_interactor.get_all()
+        output = f"<h2>Подробка</h2><h3>name: {questions[0].author}</h3>"
         return HttpResponse(output)
