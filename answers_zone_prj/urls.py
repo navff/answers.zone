@@ -20,7 +20,7 @@ from answers import views
 urlpatterns = [
     re_path(r'^admin', admin.site.urls),
     path('q', views.QuestionsPresenter.all, name='list'),
-    path('q_answered', views.QuestionsPresenter.answered, name='answered'),
+    path('answered', views.QuestionsPresenter.answered, name='answered'),
     path('q/<str:question_id>', views.QuestionsPresenter.one_item),
     path('', views.QuestionsPresenter.all, name='home'),
     #question_id
