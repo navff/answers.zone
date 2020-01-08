@@ -1,0 +1,22 @@
+{% extends "../../../static/base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block h1 %}
+    {{ title }}
+{% endblock h1 %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ question.title }}</h2>
+            <p class="card-text">{{ question.text }}</p>
+            <small class="text-muted">{{ question.author }} — {{ question.date }}</small>
+        </div>
+        <div class="card-body">
+            <a href="/q" class="card-link">←К списку вопросов</a>
+        </div>
+    </div>
+{% endblock content %}
