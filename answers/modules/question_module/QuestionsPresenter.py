@@ -19,6 +19,13 @@ class QuestionsPresenter:
             "title": "Список вопросов",
             "questions": questions,
         }
-
         return TemplateResponse(request, "modules/question_module/views/question_list.html", context=template_data)
 
+    def answered(request):
+        questions_interactor = QuestionInteractor()
+        questions = questions_interactor.get_all()
+        template_data = {
+            "title": "Отвеченные вопросы",
+            "questions": questions,
+        }
+        return TemplateResponse(request, "modules/question_module/views/question_list.html", context=template_data)
