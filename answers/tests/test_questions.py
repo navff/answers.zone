@@ -13,7 +13,8 @@ class QuestionsTest(TestCase):
     def setUp(self):
         Question.objects.create(text="This is text of question",
                                 author="unit_test",
-                                date=timezone.now())
+                                date=timezone.now(),
+                                title="This is title")
 
     def test_get_all(self):
         result = self.interactor.get_all()
@@ -34,3 +35,9 @@ class QuestionsTest(TestCase):
             )
         )
         self.assertTrue(result.author=='Vova')
+
+    def test_search_by_name(self):
+        result = self.interactor.search(word='This is title')
+        self.assertEquals(first="This is title", second=result.first().title)
+
+

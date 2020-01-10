@@ -1,5 +1,5 @@
 from answers.modules.question_module.QuestionsGateway import QuestionsGateway
-from django.utils.timezone import now
+from django.utils.timezone import timezone, timedelta, now
 
 
 class QuestionInteractor:
@@ -16,6 +16,16 @@ class QuestionInteractor:
 
     def get_by_id(self, question_id):
         return self.questions.by_id(question_id)
+
+    def search(self, word, date_start=None, date_end=None, page=1):
+        if not date_start:
+            date_start = now() + timedelta(days=-365)
+
+        if not date_end:
+            date_end = now() + timedelta(days=365)
+
+        result = self.questions.search(word, date_start, date_end, page)
+        return result
 
 
 

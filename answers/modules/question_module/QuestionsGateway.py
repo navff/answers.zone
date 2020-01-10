@@ -26,8 +26,8 @@ class QuestionsGateway:
                                 SettingsAdapter.ITEMS_PER_PAGE())
         # TODO: сформировать нормальный запрос
         # https://habr.com/ru/post/175727/“““
-        query = query[start:end]
-
+        query = query.only('title', 'author', 'date')[start:end]
+        return query
 
     def by_id(self, question_id):
         question = Question.objects.get(id=question_id)
