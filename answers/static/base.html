@@ -7,7 +7,6 @@
     <title>{% block title %}Default title{% endblock title %}</title>
     {# Load the tag library #}
     {% load bootstrap4 %}
-    {% load active_link_tags %}
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
@@ -28,10 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a href="{% url 'list' %}" class="nav-link {% active_link 'list' %}">Все вопросы</a>
+              <a href="{% url 'list' %}" class="nav-link active">Все вопросы</a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'answered' %}" class="nav-link {% active_link 'answered' %}">Отвеченные</a>
+              <a href="{% url 'answered' %}" class="nav-link active">Отвеченные</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Disabled</a>

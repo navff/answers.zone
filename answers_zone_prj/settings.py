@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'answers.apps.AnswersConfig',
     'bootstrap4', # pip install django-bootstrap4
-    'active_link', # pip install django-active-link
 ]
 
 MIDDLEWARE = [
