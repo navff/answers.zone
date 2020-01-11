@@ -15,6 +15,22 @@ class QuestionsTest(TestCase):
                                 author="unit_test",
                                 date=timezone.now(),
                                 title="This is title")
+        Question.objects.create(text="Текст второго вопроса",
+                                author="автор 2",
+                                date=timezone.now(),
+                                title="Заголовок 2")
+        Question.objects.create(text="Текст третьего вопроса",
+                                author="автор 3",
+                                date=timezone.now(),
+                                title="Заголовок 3")
+        Question.objects.create(text="Текст четвёртого вопроса",
+                                author="автор 4",
+                                date=timezone.now(),
+                                title="Заголовок 4")
+
+    def test_to_string(self):
+        question = Question(title="Title", text="This is text", author="author")
+        self.assertEquals(question.author + ' — ' + question.title, str(question))
 
     def test_get_all(self):
         result = self.interactor.get_all()
@@ -39,5 +55,9 @@ class QuestionsTest(TestCase):
     def test_search_by_name(self):
         result = self.interactor.search(word='This is title')
         self.assertEquals(first="This is title", second=result.objects[0].title)
+
+    def test_search_by_title_page2(self):
+        result = self.interactor.search(word='Заголовок', page=2)
+        self.assertTrue(result.total_objects_count == 3)
 
 

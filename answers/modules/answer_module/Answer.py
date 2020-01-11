@@ -1,14 +1,14 @@
 from django.db import models
 import uuid
+from answers.modules.question_module.Question import Question
 
 
-class Question(models.Model):
+class Answer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=100, default='')
+    question = models.ForeignKey(Question,
+                      on_delete=models.CASCADE,
+                      null=False,)
     text = models.TextField()
     date = models.DateTimeField()
     author = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.author + ' — ' + self.title[:30]
 
