@@ -11,8 +11,14 @@ class QuestionsGateway:
         return list(questions_all)
 
 
-    def search(self, word, date_start, date_end, page):
+    def search(self, word, date_start, date_end, answered, page):
         query = Question.objects.all()
+
+        if answered:
+            query = query.filter(answer__isnull=False)
+
+        if answered==False:
+            query = query.filter(answer__isnull=True)
 
         if word:
             query = query.filter(title__contains=word) \
@@ -28,7 +34,7 @@ class QuestionsGateway:
                                 SettingsAdapter.ITEMS_PER_PAGE)
 
         query = query.only('title', 'author', 'date')[start:end]
-        return PageView(objects=query, current_page=page,
+        return PageView(content=query, current_page=page,
                         total_pages=total_pages,
                         total_objects_count=total_objects_count)
 

@@ -14,18 +14,18 @@ class QuestionsPresenter:
 
     def all(request):
         questions_interactor = QuestionInteractor()
-        questions = questions_interactor.get_all()
+        questions_page_view = questions_interactor.search(answered=False)
         template_data = {
-            "title": "Список вопросов",
-            "questions": questions,
+            "title": "Неотвеченные вопросы",
+            "questions": questions_page_view.content,
         }
         return TemplateResponse(request, "modules/question_module/views/question_list.html", context=template_data)
 
     def answered(request):
         questions_interactor = QuestionInteractor()
-        questions = questions_interactor.get_all()
+        questions_page_view = questions_interactor.search(answered=True)
         template_data = {
             "title": "Отвеченные вопросы",
-            "questions": questions,
+            "questions": questions_page_view.content,
         }
         return TemplateResponse(request, "modules/question_module/views/question_list.html", context=template_data)
