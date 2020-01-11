@@ -1,6 +1,7 @@
 from .Question import Question
 from answers.common.SettingsAdapter import SettingsAdapter
 import math
+from answers.common.PageView import PageView
 
 class QuestionsGateway:
 
@@ -19,15 +20,15 @@ class QuestionsGateway:
 
         query = query.filter(date__range=[date_start, date_end])
 
-        start = page*SettingsAdapter.ITEMS_PER_PAGE()
+        start = (page-1)*SettingsAdapter.ITEMS_PER_PAGE()
         end = start + SettingsAdapter.ITEMS_PER_PAGE()
         total_objects_count = query.count()
         total_pages = math.ceil(total_objects_count /
                                 SettingsAdapter.ITEMS_PER_PAGE())
-        # TODO: сформировать нормальный запрос
-        # https://habr.com/ru/post/175727/“““
         query = query.only('title', 'author', 'date')[start:end]
-        return query
+        return PageView(objects=query, current_page=page,
+                        total_pages=total_pages,
+                        total_objects_count=total_objects_count)
 
     def by_id(self, question_id):
         question = Question.objects.get(id=question_id)

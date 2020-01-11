@@ -38,6 +38,6 @@ class QuestionsTest(TestCase):
 
     def test_search_by_name(self):
         result = self.interactor.search(word='This is title')
-        self.assertEquals(first="This is title", second=result.first().title)
+        self.assertEquals(first="This is title", second=result.objects[0].title)
 
 
