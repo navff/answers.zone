@@ -9,12 +9,13 @@ class QuestionsTest(TestCase):
     def __init__(self, *args, **kwargs):
         super(QuestionsTest, self).__init__(*args, **kwargs)
         self.interactor = QuestionInteractor()
+        self._question = None
 
     def setUp(self):
-        Question.objects.create(text="This is text of question",
-                                author="unit_test",
-                                date=timezone.now(),
-                                title="This is title")
+        self._question = Question.objects.create(text="This is text of question",
+                                                 author="unit_test",
+                                                 date=timezone.now(),
+                                                 title="This is title")
         Question.objects.create(text="Текст второго вопроса",
                                 author="автор 2",
                                 date=timezone.now(),
@@ -60,4 +61,16 @@ class QuestionsTest(TestCase):
         result = self.interactor.search(word='Заголовок', page=2)
         self.assertTrue(result.total_objects_count == 3)
 
+    # View tests
+    def test_list_page(self):
+        resp = self.client.get('/q')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_one_question_page(self):
+        resp = self.client.get(f'/q/{self._question.id}')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_answered_list_page(self):
+        resp = self.client.get(f'/answered')
+        self.assertEqual(resp.status_code, 200)
 
