@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'answers.apps.AnswersConfig',
     'bootstrap4', # pip install django-bootstrap4
+    'crispy_forms', # pip install django-crispy-forms
 ]
 
 MIDDLEWARE = [

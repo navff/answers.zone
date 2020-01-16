@@ -38,9 +38,11 @@ class QuestionsGateway:
                         total_pages=total_pages,
                         total_objects_count=total_objects_count)
 
+
     def by_id(self, question_id):
         question = Question.objects.get(id=question_id)
         return question
+
 
     def add_new(self, question):
         q = Question(title=question.title,

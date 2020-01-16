@@ -1,4 +1,5 @@
 from answers.modules.question_module.QuestionInteractor import QuestionInteractor
+from answers.modules.question_module.QuestionAddForm import QuestionAddForm
 from django.template.response import TemplateResponse
 
 
@@ -29,3 +30,14 @@ class QuestionsPresenter:
             "questions": questions_page_view.content,
         }
         return TemplateResponse(request, "modules/question_module/views/question_list.html", context=template_data)
+
+    def add(request):
+        form = QuestionAddForm()
+        template_data = {
+            'title': 'Добавление нового вопроса',
+            'form': form
+        }
+        return TemplateResponse(request,
+                                "modules/question_module/views/question_add_item.html",
+                                context=template_data)
+
