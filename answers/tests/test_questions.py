@@ -97,6 +97,19 @@ class QuestionsTest(TestCase):
         resp = self.client.get(f'/q/add')
         self.assertEqual(resp.status_code, 200)
 
+    def test_add_question_post(self):
+        data = {'title': 'this is test title',
+                'text': 'this is test text',
+                'author': 'test author'}
+        resp = self.client.post(f'/q/add', data=data)
+        self.assertEqual(resp.status_code, 302)
+
+    def test_add_question_post_invalid(self):
+        data = {'title': 'this is test title',
+                'author': 'test author'}
+        resp = self.client.post(f'/q/add', data=data)
+        self.assertEqual(resp.status_code, 200)
+
     # -------------------------------------------------------
     # Forms tests
     def test_add_question_form(self):
