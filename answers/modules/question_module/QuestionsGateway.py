@@ -15,10 +15,10 @@ class QuestionsGateway:
         query = Question.objects.all()
 
         if answered:
-            query = query.filter(answer__isnull=False)
+            query = query.filter(answers__isnull=False)
 
         if answered==False:
-            query = query.filter(answer__isnull=True)
+            query = query.filter(answers__isnull=True)
 
         if word:
             query = query.filter(title__contains=word) \

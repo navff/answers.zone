@@ -10,11 +10,20 @@
 {% block content %}
 
     <div class="card">
+        <div class="card-header">{{ question.title }}</div>
         <div class="card-body">
-            <h2 class="card-title">{{ question.title }}</h2>
-            <p class="card-text">{{ question.text }}</p>
+            <div class="card-text lead">{{ question.text|linebreaks }}</div>
             <small class="text-muted">{{ question.author }} — {{ question.date }}</small>
         </div>
+        {% if question.answers.first %}
+            <div class="card-body">
+                <h6>Ответ:</h6>
+                {{ question.answers.first.text|linebreaks }}
+                <p>
+                    <small class="text-muted">{{ question.answers.first.author }} — {{ question.answers.first.date }}</small>
+                </p>
+            </div>
+        {% endif %}
         <div class="card-body">
             <a href="/q" class="card-link">←К списку вопросов</a>
         </div>
