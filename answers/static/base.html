@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex">
 
     <title>{% block title %}Default title{% endblock title %}</title>
     {# Load the tag library #}
@@ -20,20 +21,17 @@
 <header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Answer Zone</a>
+        <a class="navbar-brand" href="{% url 'list_questions_url' %}">Answer Zone</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a href="{% url 'list' %}" class="nav-link active">Неотвеченные</a>
+              <a href="{% url 'list_questions_url' %}" class="nav-link active">Неотвеченные</a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'answered' %}" class="nav-link active">Отвеченные</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a href="{% url 'answered_questions_url' %}" class="nav-link active">Отвеченные</a>
             </li>
           </ul>
         </div>

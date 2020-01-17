@@ -3,6 +3,7 @@ from answers.modules.answer_module.Answer import Answer
 from django.test import TestCase
 from django.utils import timezone
 from answers.modules.question_module.QuestionInteractor import  QuestionInteractor
+from answers.modules.question_module.QuestionAddForm import QuestionAddForm
 
 
 class QuestionsTest(TestCase):
@@ -24,15 +25,16 @@ class QuestionsTest(TestCase):
                                              date=timezone.now(),
                                              question=self._question)
 
-
         Question.objects.create(text="Текст второго вопроса",
                                 author="автор 2",
                                 date=timezone.now(),
                                 title="Заголовок 2")
+
         Question.objects.create(text="Текст третьего вопроса",
                                 author="автор 3",
                                 date=timezone.now(),
                                 title="Заголовок 3")
+
         Question.objects.create(text="Текст четвёртого вопроса",
                                 author="автор 4",
                                 date=timezone.now(),
@@ -55,16 +57,15 @@ class QuestionsTest(TestCase):
         result = self.interactor.get_by_id(question_from_db.id)
         self.assertTrue(result.id == question_from_db.id)
 
-
-    def test_add_new_by_guest(self):
-        result = self.interactor.add_new_by_guest(
+    def test_add(self):
+        result = self.interactor.add(
             question=Question(
                 author='Vova',
                 text='This is text',
                 title='This is title'
             )
         )
-        self.assertTrue(result.author=='Vova')
+        self.assertTrue(result.author == 'Vova')
 
     def test_search_by_name(self):
         result = self.interactor.search(word=self._question.title)
@@ -89,6 +90,23 @@ class QuestionsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_answered_list_page(self):
-        resp = self.client.get(f'/answered')
+        resp = self.client.get(f'/q/answered')
         self.assertEqual(resp.status_code, 200)
+
+    def test_add_question_page(self):
+        resp = self.client.get(f'/q/add')
+        self.assertEqual(resp.status_code, 200)
+
+    # -------------------------------------------------------
+    # Forms tests
+    def test_add_question_form(self):
+        d = {'title': 'this is title',
+             'text': 'this is text',
+             'author': 'this is author'}
+        form = QuestionAddForm(d)
+        result = form.save()
+
+        self.assertTrue(form.is_bound)
+        self.assertTrue(result.id)
+
 

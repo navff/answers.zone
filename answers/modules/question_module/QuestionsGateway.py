@@ -49,4 +49,5 @@ class QuestionsGateway:
                      text=question.text,
                      date=question.date,
                      author=question.author)
-        return q.save()
+        q.save()
+        return q

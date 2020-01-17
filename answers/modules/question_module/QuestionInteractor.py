@@ -1,15 +1,14 @@
 from answers.modules.question_module.QuestionsGateway import QuestionsGateway
-from django.utils.timezone import timezone, timedelta, now
+from django.utils.timezone import timedelta, now
 
 
 class QuestionInteractor:
     def __init__(self):
         self.questions = QuestionsGateway()
 
-    def add_new_by_guest(self, question):
-        question.date = now()
-        self.questions.add_new(question)
-        return question
+    def add(self, question):
+        result = self.questions.add_new(question)
+        return result
 
     def get_all(self):
         return self.questions.all()
