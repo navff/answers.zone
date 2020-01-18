@@ -62,3 +62,18 @@ class QuestionsPresenter:
                               "modules/question_module/views/question_add_item.html",
                               template_data)
 
+    class FormUpdate(QuestionPresenterMixin, View):
+        def get(self, request, question_id):
+            question = self.questions_interactor.get_by_id(question_id)
+            form = QuestionAddForm(instance=question)
+            template_data = {
+                'title': f'Обновление вопроса | {question.title}',
+                'form': form,
+                'question': question
+            }
+            return render(request,
+                          "modules/question_module/views/question_update_item.html",
+                          template_data)
+
+
+

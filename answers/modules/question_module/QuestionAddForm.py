@@ -3,7 +3,11 @@ from .Question import Question
 from .QuestionInteractor import QuestionInteractor
 
 
-class QuestionAddForm(forms.Form):
+class QuestionAddForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = {'title', 'text', 'author'}
+
     title = forms.CharField(
         max_length=100,
         label='Заголовок вопроса',
@@ -26,8 +30,7 @@ class QuestionAddForm(forms.Form):
                                  'placeholder': 'Напишите, как вас зовут'
                              }))
 
-
-    def save(self):
+    def save(self, **kwargs):
         if not self.is_valid():
             pass
 

@@ -1,0 +1,19 @@
+{% extends "../../../static/base.html" %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block h1 %}
+    {{ title }}
+{% endblock h1 %}
+
+{% block content %}
+    <form action='{% url 'question_update_url' question_id=question.id %}' method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit" class="btn btn-primary mb-2" value="Сохранить изменения">
+    </form>
+{% endblock content %}

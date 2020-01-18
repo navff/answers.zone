@@ -25,7 +25,8 @@
             </div>
         {% endif %}
         <div class="card-body">
-            <a href="/q" class="card-link">←К списку вопросов</a>
+            <a href="/q" class="btn btn-dark">←К списку вопросов</a>
+            <a href="/q/update/{{ question.id }}" class="btn btn-light">Редактировать вопрос</a><br>
         </div>
     </div>
 {% endblock content %}
