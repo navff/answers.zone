@@ -51,3 +51,11 @@ class QuestionsGateway:
                      author=question.author)
         q.save()
         return q
+
+    def delete(self, question_id):
+        q = self.by_id(question_id)
+        q.delete()
+
+
+
+

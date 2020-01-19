@@ -8,6 +8,8 @@ class QuestionAddForm(forms.ModelForm):
         model = Question
         fields = {'title', 'text', 'author'}
 
+    field_order = ['title', 'text', 'author']
+
     title = forms.CharField(
         max_length=100,
         label='Заголовок вопроса',
@@ -30,14 +32,3 @@ class QuestionAddForm(forms.ModelForm):
                                  'placeholder': 'Напишите, как вас зовут'
                              }))
 
-    def save(self, **kwargs):
-        if not self.is_valid():
-            pass
-
-        interactor = QuestionInteractor()
-        new_question = interactor.add(Question(
-            author=self.cleaned_data['author'],
-            title=self.cleaned_data['title'],
-            text=self.cleaned_data['text'],
-        ))
-        return new_question

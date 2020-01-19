@@ -13,6 +13,12 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse('question_detail_url', kwargs={'question_id': self.id})
 
+    def get_update_url(self):
+        return reverse('question_update_url', kwargs={'question_id': self.id})
+
+    def get_delete_url(self):
+        return reverse('question_delete_url', kwargs={'question_id': self.id})
+
     def __str__(self):
         return self.author + ' — ' + self.title[:30]
 

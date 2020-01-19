@@ -7,4 +7,5 @@ urlpatterns = [
     path('/add', QuestionsPresenter.FormAdd.as_view(), name='question_add_url'),
     path('/<str:question_id>', QuestionsPresenter.OneItem.as_view(), name='question_detail_url'),
     path('/update/<str:question_id>', QuestionsPresenter.FormUpdate.as_view(), name='question_update_url'),
+    path('/delete/<str:question_id>', QuestionsPresenter.DeleteQuestion.as_view(), name='question_delete_url'),
 ]

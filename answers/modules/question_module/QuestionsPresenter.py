@@ -67,7 +67,6 @@ class QuestionsPresenter:
             question = self.questions_interactor.get_by_id(question_id)
             form = QuestionAddForm(instance=question)
             template_data = {
-                'title': f'Обновление вопроса | {question.title}',
                 'form': form,
                 'question': question
             }
@@ -75,5 +74,23 @@ class QuestionsPresenter:
                           "modules/question_module/views/question_update_item.html",
                           template_data)
 
+        def post(self, request, question_id):
+            question = self.questions_interactor.get_by_id(question_id)
+            form = QuestionAddForm(request.POST, instance=question)
+            if form.is_valid():
+                updated_question = form.save()
+                return redirect(updated_question)
 
+            template_data = {
+                'form': form,
+                'question': question
+            }
 
+            return render(request,
+                          'modules/question_module/views/question_update_item.html',
+                          template_data)
+
+    class DeleteQuestion(QuestionPresenterMixin, View):
+        def get(self, request, question_id):
+            self.questions_interactor.delete(question_id)
+            return redirect('list_questions_url')

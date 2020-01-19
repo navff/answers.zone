@@ -26,5 +26,7 @@ class QuestionInteractor:
         result = self.questions.search(word, date_start, date_end, answered, page)
         return result
 
+    def delete(self, question_id):
+        self.questions.delete(question_id)
 
 
