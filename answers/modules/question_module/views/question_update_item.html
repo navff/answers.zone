@@ -15,35 +15,10 @@
         {{ form }}
 
         <input type="submit" class="btn btn-primary mb-2" value="Сохранить изменения">
-        <a class="btn btn-danger float-right" data-href="{{ question.get_delete_url }}" href="#"
-                    data-toggle="modal" data-target="#confirm-delete">
-        Удалить
+        <a class="btn btn-danger float-right"
+           data-href="{{ question.get_delete_url }}" href="#"
+           data-toggle="modal" data-target="#confirm-delete"> Удалить
         </a>
     </form>
-
-    <br><br>
-    <script>
-        $('#confirm-delete').on('show.bs.modal', function (e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
-    </script>
-
-
-
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    Точно удалить?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                    <a href="{{ question.get_delete_url }}" class="btn btn-danger btn-ok">Удалить</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    {% include "static/confirm_delete.html" with text='Вы точно хотите удалить вопрос?'%}
 {% endblock content %}
