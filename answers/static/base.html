@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex">
-
+    <link rel="stylesheet" href="{% static 'main.css' %}">
     <title>{% block title %}Default title{% endblock title %}</title>
     {# Load the tag library #}
     {% load bootstrap4 %}
